@@ -178,20 +178,6 @@ func setLevels(levels []string) {
 	}
 }
 
-func NewLogger(loggerConfigFile string) *Logger {
-	config, err := NewConfig(loggerConfigFile)
-	if err != nil {
-		panic(err)
-	}
-	logLevel := config.MustValue("golog", "log.level", "INFO")
-	logDir := config.MustValue("golog", "log.dir", "./")
-	logFile := config.MustValue("golog", "log.file", "file.log")
-	logReserveCounter := config.MustInt("golog", "log.reserve.counter", 5)
-	logSuffix := config.MustValue("golog", "log.suffix", "2006010215")
-	logConsole := config.MustInt("golog", "log.console", 0)
-	logColorfull := config.MustInt("golog", "log.colorfull", 1)
-	return newLoggerWithArg(logLevel, logDir, logFile, logReserveCounter, logSuffix, logConsole, logColorfull)
-}
 
 func InitLooger(level string, dir string, file string, reserve int, suffix string, console int, color int) {
 	logger = newLoggerWithArg(level, dir, file, reserve, suffix, console, color)
@@ -224,12 +210,6 @@ func newLoggerWithArg(level string, dir string, file string, reserve int, suffix
 	return loggerHandle
 }
 
-// 创建默认的logger log的配置在pwd
-func NewDefaultLogger() *Logger {
-	file, _ := os.Getwd()
-	logFile := fmt.Sprintf("%s/%s", file, "golog.cfg")
-	return NewLogger(logFile)
-}
 
 // 新建console的日志handle
 func NewConsoleLogger() *Logger {
