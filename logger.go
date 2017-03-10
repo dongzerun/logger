@@ -1,11 +1,5 @@
 package logger
 
-/*
-Author: chenwenjiang
-Email:chenwenjiang@oneniceapp.com
-Create date: 2015-04-29
-*/
-
 import (
 	"fmt"
 	"io"
